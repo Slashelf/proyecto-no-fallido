@@ -14,7 +14,6 @@ class UserProfileController extends Controller
     public function index()
     {
         $datos_personales=auth()->user();
-        session()->forget('solicitud');
         return view('perfil.usuario',compact('datos_personales'));
     }
 
@@ -23,9 +22,7 @@ class UserProfileController extends Controller
      */
     public function create()
     {
-        $datos_personales=auth()->user();
-        session()->flash('solicitud', 'Bienvenido al perfil de usuario.');
-        return view('perfil.usuario',compact('datos_personales'));
+
     }
 
     /**
@@ -33,37 +30,7 @@ class UserProfileController extends Controller
      */
     public function store(Request $request)
     {
-        try {
-            // Verificar si se subió una imagen
-            if ($request->hasFile('imagenusuario')) {
-                // Obtener el archivo
-                $archivo = $request->file('imagenusuario');
-    
-                // Generar un nombre único para evitar conflictos
-                $nombreArchivo = time() . '_' . $archivo->getClientOriginalName();
-    
-                // Guardar la imagen en 'public/imagenes' usando el nombre generado
-                $ruta = $archivo->storeAs('fotoperfil', $nombreArchivo, 'public');
-    
-                // Devolver respuesta JSON con la ruta de acceso pública
-                return response()->json([
-                    'mensaje' => 'Imagen subida correctamente',
-                    'nombre' => $nombreArchivo,
-                    'ruta' => Storage::url($ruta), // Devuelve la URL pública de la imagen
-                ]);
-            }
-    
-            // Si no se subió ninguna imagen
-            return response()->json([
-                'mensaje' => 'No se recibió ninguna imagen',
-            ], 400);
-        } catch (\Exception $e) {
-            // Manejo de errores en caso de falla
-            return response()->json([
-                'mensaje' => 'Hubo un error al subir la imagen',
-                'error' => $e->getMessage(),
-            ], 500);
-        }
+       
     }
 
     /**
