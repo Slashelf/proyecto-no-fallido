@@ -20,4 +20,5 @@ Route::middleware(['auth'])->group(function () {
     Route::resource('/carrera',CarreraController::class);
     Route::resource('/usuarios',UniversidadController::class);
     Route::resource('/profile/usuario', UserProfileController::class);
+    
 });
