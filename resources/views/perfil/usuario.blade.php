@@ -506,7 +506,7 @@
                 })
                 .catch(error => {
                     console.error('Error al obtener la dirección:', error);
-                    $('#domicilio').val('');
+                    $       ('#domicilio').val('');
             });
         }
     </script>
