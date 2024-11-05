@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             'username' => 'admin_postgrado',
             'nombres' => 'postgrado',
             'apellido_paterno' => 'uatf',
+            'apellido_materno' => 'uatf',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('123456789')
         ])->assignRole('administrador');

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class UserProfileController extends Controller
 {
@@ -13,7 +14,7 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        $datos_personales=auth()->user();
+        $datos_personales=Auth::user();
         return view('perfil.usuario',compact('datos_personales'));
     }
 
@@ -62,8 +63,8 @@ class UserProfileController extends Controller
                 'latitud'=>'required|numeric',
                 'longitud'=>'required|numeric',
                 'domicilio'=>'required',
-                'fechanacimiento'=>'required|date',
-                'lugarnacimiento'=>'required',
+                'fecha_nacimiento'=>'required|date',
+                'lugar_nacimiento'=>'required',
                 'nacionalidad'=>'required',
             ]
         );
@@ -73,7 +74,7 @@ class UserProfileController extends Controller
                 $nombreArchivo = time() . '_' . $archivo->getClientOriginalName();
                 $ruta = $archivo->storeAs('fotoperfil', $nombreArchivo, 'public');
 
-                Storage::delete('public/'.auth()->user()->image_user);
+                Storage::delete('public/'.Auth::user()->image_user);
 
                 $usuario=User::find($id);
                 $usuario->image_user=$ruta;
@@ -83,8 +84,8 @@ class UserProfileController extends Controller
                 $usuario->latitud=$request->latitud;
                 $usuario->longitud=$request->longitud;
                 $usuario->domicilio=$request->domicilio;
-                $usuario->fecha_nacimiento=$request->fechanacimiento;
-                $usuario->lugar_nacimiento=$request->lugarnacimiento;
+                $usuario->fecha_nacimiento=$request->fecha_nacimiento;
+                $usuario->lugar_nacimiento=$request->lugar_nacimiento;
                 $usuario->nacionalidad=$request->nacionalidad;
                 $usuario->save();
 
@@ -101,8 +102,8 @@ class UserProfileController extends Controller
                 $usuario->latitud=$request->latitud;
                 $usuario->longitud=$request->longitud;
                 $usuario->domicilio=$request->domicilio;
-                $usuario->fecha_nacimiento=$request->fechanacimiento;
-                $usuario->lugar_nacimiento=$request->lugarnacimiento;
+                $usuario->fecha_nacimiento=$request->fecha_nacimiento;
+                $usuario->lugar_nacimiento=$request->lugar_nacimiento;
                 $usuario->nacionalidad=$request->nacionalidad;
                 $usuario->save();
 

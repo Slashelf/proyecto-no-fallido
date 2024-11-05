@@ -174,26 +174,48 @@
 
                         <div class="form-group" data-aos="fade-up">
                             <div class="d-flex row">
+
                                 <div class="col-4">
-                                    <x-adminlte-callout theme="{{$datos_personales->fecha_nacimiento?'success':'danger'}}" title-class="text-bold text-dark"
-                                        icon="fas fa-md fa-calendar-check"
-                                        title="Fecha de nacimiento">
-                                        {{$datos_personales->fecha_nacimiento}}
-                                    </x-adminlte-callout>
+                                    @if ($datos_personales->fecha_nacimiento)
+                                        <x-adminlte-callout theme="success" title-class="text-bold text-dark"
+                                            icon="fas fa-md fa-calendar-check" title="Fecha de nacimiento">
+                                            {{$datos_personales->fecha_nacimiento}}
+                                        </x-adminlte-callout>
+                                    @else
+                                        <x-adminlte-callout theme="danger" title-class="text-bold text-dark"
+                                            icon="fas fa-md fa-calendar-check" title="Fecha de nacimiento">
+                                            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control is-valid" value="" required>
+                                            <small class="text-danger">Nota: Registra tu Fecha de nacimiento</small>
+                                        </x-adminlte-callout>
+                                    @endif
                                 </div>
                                 <div class="col-4">
-                                    <x-adminlte-callout theme="{{$datos_personales->lugar_nacimiento?'success':'danger'}}" title-class="text-bold text-dark"
-                                        icon="fas fa-md fa-map-marker-alt"
-                                        title="Lugar de nacimiento">
-                                        {{$datos_personales->lugar_nacimiento}}
-                                    </x-adminlte-callout>
+                                    @if ($datos_personales->lugar_nacimiento)
+                                        <x-adminlte-callout theme="success" title-class="text-bold text-dark"
+                                            icon="fas fa-md fa-calendar-check" title="Lugar de nacimientoo">
+                                            {{$datos_personales->lugar_nacimiento}}
+                                        </x-adminlte-callout>
+                                    @else
+                                        <x-adminlte-callout theme="danger" title-class="text-bold text-dark"
+                                            icon="fas fa-md fa-calendar-check" title="Lugar de nacimiento">
+                                            <input type="text" id="lugar_nacimiento" name="lugar_nacimiento" class="form-control is-valid" value="" required>
+                                            <small class="text-danger">Nota: Actualiza tu Lugar de nacimiento</small>
+                                        </x-adminlte-callout>
+                                    @endif
                                 </div>
                                 <div class="col-4">
-                                    <x-adminlte-callout theme="{{$datos_personales->nacionalidad?'success':'danger'}}" title-class="text-bold text-dark"
-                                        icon="fas fa-md fa-flag"
-                                        title="Nacionalidad">
-                                        {{$datos_personales->nacionalidad}}
-                                    </x-adminlte-callout>
+                                    @if ($datos_personales->nacionalidad)
+                                        <x-adminlte-callout theme="success" title-class="text-bold text-dark"
+                                            icon="fas fa-md fa-calendar-check" title="Nacionalidad">
+                                            {{$datos_personales->nacionalidad}}
+                                        </x-adminlte-callout>
+                                    @else
+                                        <x-adminlte-callout theme="danger" title-class="text-bold text-dark"
+                                            icon="fas fa-md fa-calendar-check" title="Nacionalidad">
+                                            <input type="text" id="nacionalidad" name="nacionalidad" class="form-control is-valid" value="" required>
+                                            <small class="text-danger">Nota: Actualiza tu Nacionalidad</small>
+                                        </x-adminlte-callout>
+                                    @endif
                                 </div>
                             </div>
                         </div>
@@ -462,7 +484,7 @@
             marcador=L.marker([{{$datos_personales->latitud}}, {{$datos_personales->longitud}}]).addTo(map)
             .bindPopup('Yo vivo aquí.')
             .openPopup();
-        @endif
+        @endif 
 
         map.on('click', onMapClick);
         function onMapClick(e) {
