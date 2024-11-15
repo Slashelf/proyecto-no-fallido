@@ -126,15 +126,29 @@
                         </div>
                         <div class="form-group" data-aos="fade-up">
                             <div class="d-flex justify-content-center align-items-center row">
-                                <div class="col-4">
-                                    <x-adminlte-callout theme="{{$datos_personales->sexo?'success':'danger'}}" title-class="text-bold text-dark"
-                                        icon="{{ $datos_personales->sexo == 'M' ? 'fas fa-md fa-mars text-dark' : 'fas fa-md fa-venus text-dark' }}"
+                                    <div class="col-4">
+                                    <!-- Componente de callout con radio buttons en forma de lista -->
+                                    <x-adminlte-callout 
+                                        theme="{{ $datos_personales->sexo === 'M' ? 'success' : 'danger' }}" 
+                                        title-class="text-bold text-dark"
                                         title="Sexo">
-                                        {{$datos_personales->sexo=='M' ? 'Masculino' : 'Femenino'}}
+                                        
+                                        <ul style="list-style-type: none; padding-left: 0;">
+                                            <li>
+                                                <input type="radio" name="sexo" value="M" id="sexo_m" {{ $datos_personales->sexo === 'M' ? 'checked' : '' }}>
+                                                <label for="sexo_m">Masculino</label>
+                                            </li>
+                                            <li>
+                                                <input type="radio" name="sexo" value="F" id="sexo_f" {{ $datos_personales->sexo === 'F' ? 'checked' : '' }}>
+                                                <label for="sexo_f">Femenino</label>
+                                            </li>
+                                        </ul>
+
                                     </x-adminlte-callout>
                                 </div>
-                                <div class="col-4">
-                                    <x-adminlte-callout theme="{{$datos_personales->celular?'success':'danger'}}" title-class="text-bold text-dark"
+
+                                 <div class="col-4">
+                                     <x-adminlte-callout theme="{{$datos_personales->celular?'success':'danger'}}" title-class="text-bold text-dark"
                                         icon="fas fa-md fa-phone"
                                         title="Celular">
                                         <input type="text" id="celular" name="celular" class="form-control is-valid" value="{{$datos_personales->celular}}" required>
@@ -174,64 +188,265 @@
 
                         <div class="form-group" data-aos="fade-up">
                             <div class="d-flex row">
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="{{$datos_personales->fecha_nacimiento?'success':'danger'}}" title-class="text-bold text-dark"
+                                        icon="fas fa-md fa-calendar-check"
+                                        title="Correo Electrónico">
+                                        <input type="fecha_nacimiento" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control is-valid" value="{{$datos_personales->fecha_nacimiento}}" required>
+                                        <small class="text-danger">Nota: Registra tu Fecha de nacimiento</small>
+                                    </x-adminlte-callout>
+                                </div>
 
                                 <div class="col-4">
-                                    @if ($datos_personales->fecha_nacimiento)
-                                        <x-adminlte-callout theme="success" title-class="text-bold text-dark"
-                                            icon="fas fa-md fa-calendar-check" title="Fecha de nacimiento">
-                                            {{$datos_personales->fecha_nacimiento}}
-                                        </x-adminlte-callout>
-                                    @else
-                                        <x-adminlte-callout theme="danger" title-class="text-bold text-dark"
-                                            icon="fas fa-md fa-calendar-check" title="Fecha de nacimiento">
-                                            <input type="date" id="fecha_nacimiento" name="fecha_nacimiento" class="form-control is-valid" value="" required>
-                                            <small class="text-danger">Nota: Registra tu Fecha de nacimiento</small>
-                                        </x-adminlte-callout>
-                                    @endif
+                                    <x-adminlte-callout theme="{{$datos_personales->lugar_nacimiento?'success':'danger'}}" title-class="text-bold text-dark"
+                                        icon="fas fa-location-arrow"
+                                        title="Lugar de nacimiento">
+                                        <input type="lugar_nacimiento" id="lugar_nacimiento" name="lugar_nacimiento" class="form-control is-valid" value="{{$datos_personales->lugar_nacimiento}}" required>
+                                        <small class="text-danger">Nota: Registra tu Lugar de nacimiento</small>
+                                    </x-adminlte-callout>
                                 </div>
+
                                 <div class="col-4">
-                                    @if ($datos_personales->lugar_nacimiento)
-                                        <x-adminlte-callout theme="success" title-class="text-bold text-dark"
-                                            icon="fas fa-md fa-calendar-check" title="Lugar de nacimientoo">
-                                            {{$datos_personales->lugar_nacimiento}}
-                                        </x-adminlte-callout>
-                                    @else
-                                        <x-adminlte-callout theme="danger" title-class="text-bold text-dark"
-                                            icon="fas fa-md fa-calendar-check" title="Lugar de nacimiento">
-                                            <input type="text" id="lugar_nacimiento" name="lugar_nacimiento" class="form-control is-valid" value="" required>
-                                            <small class="text-danger">Nota: Actualiza tu Lugar de nacimiento</small>
-                                        </x-adminlte-callout>
-                                    @endif
+                                    <x-adminlte-callout theme="{{$datos_personales->nacionalidad?'success':'danger'}}" title-class="text-bold text-dark"
+                                        icon="fas fa-flag"
+                                        title="Nacionalidad">
+                                        <input type="nacionalidad" id="nacionalidad" name="nacionalidad" class="form-control is-valid" value="{{$datos_personales->nacionalidad}}" required>
+                                        <small class="text-danger">Nota: Registra tu Nacionalidad</small>
+                                    </x-adminlte-callout>
                                 </div>
-                                <div class="col-4">
-                                    @if ($datos_personales->nacionalidad)
-                                        <x-adminlte-callout theme="success" title-class="text-bold text-dark"
-                                            icon="fas fa-md fa-calendar-check" title="Nacionalidad">
-                                            {{$datos_personales->nacionalidad}}
-                                        </x-adminlte-callout>
-                                    @else
-                                        <x-adminlte-callout theme="danger" title-class="text-bold text-dark"
-                                            icon="fas fa-md fa-calendar-check" title="Nacionalidad">
-                                            <input type="text" id="nacionalidad" name="nacionalidad" class="form-control is-valid" value="" required>
-                                            <small class="text-danger">Nota: Actualiza tu Nacionalidad</small>
-                                        </x-adminlte-callout>
-                                    @endif
-                                </div>
+                               
+                                
                             </div>
                         </div>
                         <button type="submit" class="btn btn-success mt-4 btn-lg">Guardar cambios</button>
                     </form>
                 </div>
             </div>
+
+
             <div class="tab-pane fade" id="perfil-academico" role="tabpanel" aria-labelledby="perfil-academico-tab">
-               
+                <div class="blur-background p-4">
+                    <form id="datosacademicos" enctype="multipart/form-data">
+                        <input type="hidden" name="_method" value="PUT">
+                        
+                        <div class="form-group" data-aos="fade-up">
+                            <div class="d-flex justify-content-center align-items-center row">
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="{{$datos_personales->nombres?'success':'danger'}}" title-class="text-bold text-dark"
+                                        icon="fas fa-md fa-user text-dark" title="Nombres">
+                                        {{$datos_personales->nombres}}
+                                    </x-adminlte-callout>
+                                </div>
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="{{$datos_personales->apellido_paterno?'success':'danger'}}" title-class="text-bold text-dark"
+                                        icon="fas fa-md fa-user text-dark" title="Apellido Paterno">
+                                        {{$datos_personales->apellido_paterno}}
+                                    </x-adminlte-callout>
+                                </div>
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="{{$datos_personales->apellido_materno?'success':'danger'}}" title-class="text-bold text-dark"
+                                        icon="fas fa-lg fa-user text-dark" title="Apellido Materno">
+                                        {{$datos_personales->apellido_materno}}
+                                    </x-adminlte-callout>
+                                </div>
+                            </div>
+                        </div>
+                       
+                        
+
+                        <div class="form-group" data-aos="fade-up">
+                            <div class="d-flex row">
+
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="info" title-class="text-bold text-dark" icon="fas fa-university" title="Universidad">
+                                        <select id="universidad" name="universidad" class="form-control" required>
+                                            <option value="">Seleccione su universidad</option>
+                                            @foreach($universidades as $universidad)
+                                                <option value="{{ $universidad->id }}">{{ $universidad->nombreuniversidad }}</option>
+                                            @endforeach
+                                        </select>
+                                        <small class="text-danger">Nota: Selecciona tu universidad</small>
+                                    </x-adminlte-callout>
+                                </div>
+
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="info" title-class="text-bold text-dark" icon="fas fa-building" title="Facultad">
+                                        <select id="facultad" name="facultad" class="form-control" required>
+                                            <option value="">Seleccione una facultad</option>
+                                        </select>
+                                        <small class="text-danger">Nota: Selecciona tu facultad</small>
+                                    </x-adminlte-callout>
+                                </div>
+
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="info" title-class="text-bold text-dark" icon="fas fa-graduation-cap" title="Carrera">
+                                        <select id="carrera" name="carrera" class="form-control" required>
+                                            <option value="">Seleccione una carrera</option>
+                                        </select>
+                                        <small class="text-danger">Nota: Selecciona tu carrera</small>
+                                    </x-adminlte-callout>
+                                </div>
+
+                            </div>
+                        </div>
+
+
+
+                        
+                        <div class="form-group" data-aos="fade-up">
+                            <div class="d-flex row">
+
+                                <!-- Fecha de Emisión del Título -->
+                                <div class="col-12 col-md-4 mb-3">
+                                    <x-adminlte-callout theme="{{ $datos_personales->fecha_titulo ? 'success' : 'danger' }}" 
+                                                        title-class="text-bold text-dark"
+                                                        icon="fas fa-md fa-calendar-check"
+                                                        title="Fecha de Emisión del Título">
+                                        <input type="date" id="fecha_titulo" name="fecha_titulo" class="form-control is-valid" value="{{ $datos_personales->fecha_titulo }}" required>
+                                        <small class="text-danger">Nota: Registra la fecha de obtención del título</small>
+                                    </x-adminlte-callout>
+                                </div>
+
+                                <!-- Foto del Título -->
+                                <div class="col-12 col-md-4 mb-3">
+                                    <x-adminlte-callout theme="{{ $datos_personales->foto_titulo ? 'success' : 'danger' }}" 
+                                                        title-class="text-bold text-dark"
+                                                        icon="fas fa-file-upload"
+                                                        title="Foto del Título">
+                                        <input type="file" id="foto_titulo" name="foto_titulo" class="form-control-file" accept="image/*">
+                                        <small class="text-danger">Nota: Sube una foto de tu título</small>
+                                    </x-adminlte-callout>
+                                </div>
+
+                                <!-- Botón para abrir el modal de Posgrados -->
+                                <div class="col-12 col-md-4 mb-3">
+                                    <x-adminlte-callout theme="info" 
+                                                        title-class="text-bold text-dark"
+                                                        icon="fas fa-graduation-cap"
+                                                        title="Lista de Posgrados">
+                                                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalPosgrados">
+                                                            Abrir Modal
+                                                        </button>
+                                        <small class="text-danger">Nota: Sube, edita o elimina la lista de posgrados que has realizado.</small>
+                                    </x-adminlte-callout>
+                                </div>
+
+                            </div>
+                        </div>
+
+                        <!-- Modal para Subir Lista de Posgrados borrado po error en codigo coorregir -->
+                       
+
+
+                        <button type="submit" class="btn btn-success mt-4 btn-lg">Guardar cambios</button>
+                    </form>
+                </div>               
             </div>
+
+
+
             <div class="tab-pane fade" id="perfil-laboral" role="tabpanel" aria-labelledby="perfil-laboral-tab">
+                <div class="blur-background p-4">
+                    <form id="datoslaborales" enctype="multipart/form-data">
+                        <input type="hidden" name="_method" value="PUT">
+                        
+                        <div class="form-group" data-aos="fade-up">
+                            <div class="d-flex row">
+                                <!-- Trabajo Actual -->
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="{{$datos_personales->trabajo_actual ? 'success' : 'danger'}}" 
+                                                        title-class="text-bold text-dark"
+                                                        icon="fas fa-briefcase"
+                                                        title="Trabajo Actual">
+                                        <input type="text" id="trabajo_actual" name="trabajo_actual" class="form-control is-valid" 
+                                            value="{{$datos_personales->trabajo_actual}}" required>
+                                        <small class="text-danger">Nota: Registra tu Trabajo Actual</small>
+                                    </x-adminlte-callout>
+                                </div>
 
+                                <!-- Departamento de Trabajo -->
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="{{$datos_personales->dep_trabajo ? 'success' : 'danger'}}" 
+                                                        title-class="text-bold text-dark"
+                                                        icon="fas fa-building"
+                                                        title="Departamento de Trabajo">
+                                        <input type="text" id="dep_trabajo" name="dep_trabajo" class="form-control is-valid" 
+                                            value="{{$datos_personales->dep_trabajo}}" required>
+                                        <small class="text-danger">Nota: Registre el Departamento donde trabaja</small>
+                                    </x-adminlte-callout>
+                                </div>
+
+                                <!-- Cargo Actual -->
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="{{$datos_personales->cargo_desempeno ? 'success' : 'danger'}}" 
+                                                        title-class="text-bold text-dark"
+                                                        icon="fas fa-user-tie"
+                                                        title="Cargo Actual">
+                                        <input type="text" id="cargo_desempeno" name="cargo_desempeno" class="form-control is-valid" 
+                                            value="{{$datos_personales->cargo_desempeno}}" required>
+                                        <small class="text-danger">Nota: Registra el cargo que desempeña</small>
+                                    </x-adminlte-callout>
+                                </div>
+                            </div>
+                        </div>
+
+                                            
+                        
+
+                        <div class="form-group" data-aos="fade-up">
+                            <div class="col-4">
+                                <x-adminlte-callout theme="{{$datos_personales->periodo_trabajo ? 'success' : 'danger'}}" 
+                                                    title-class="text-bold text-dark"
+                                                    icon="fas fa-calendar-alt"
+                                                    title="Período de Trabajo">
+                                    <input type="text" id="periodo_trabajo" name="periodo_trabajo" class="form-control is-valid" 
+                                        value="{{$datos_personales->periodo_trabajo}}" placeholder="Seleccione el período" required>
+                                    <small class="text-danger">Nota: Registra el período de trabajo</small>
+                                </x-adminlte-callout>
+                            </div>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-success mt-4 btn-lg">Guardar cambios</button>
+                    </form>
+                </div>               
             </div>
+
             <div class="tab-pane fade" id="contrasena" role="tabpanel" aria-labelledby="contrasena-tab">
+                <div class="blur-background p-4">
+                    <form id="contrasena" enctype="multipart/form-data">
+                        <input type="hidden" name="_method" value="PUT">
+                        
+                       
+                        
+                        <div class="form-group">
+                            <div class="d-flex justify-content-center align-items-center row">
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="primary" title-class="text-bold text-dark"
+                                        icon="fas fa-md fa-key text-dark" title="Contraseña Actual">
+                                        <input type="password" name="current_password" class="form-control" placeholder="Contraseña Actual" required>
+                                    </x-adminlte-callout>
+                                </div>
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="info" title-class="text-bold text-dark"
+                                        icon="fas fa-md fa-key text-dark" title="Nueva Contraseña">
+                                        <input type="password" name="new_password" class="form-control" placeholder="Nueva Contraseña" required>
+                                    </x-adminlte-callout>
+                                </div>
+                                <div class="col-4">
+                                    <x-adminlte-callout theme="info" title-class="text-bold text-dark"
+                                        icon="fas fa-md fa-key text-dark" title="Confirmar Contraseña">
+                                        <input type="password" name="new_password_confirmation" class="form-control" placeholder="Confirmar Contraseña" required>
+                                    </x-adminlte-callout>
+                                </div>
+                            </div>
 
+                        <button type="submit" class="btn btn-success mt-4 btn-lg">Guardar cambios</button>
+                    </form>
+                </div>               
             </div>
+
+
         </div>
     </div>
 @stop
@@ -252,6 +467,9 @@
     <link href="https://cdn.datatables.net/v/bs5/jszip-3.10.1/dt-2.1.3/b-3.1.1/b-colvis-3.1.1/b-html5-3.1.1/b-print-3.1.1/date-1.5.3/fc-5.0.1/fh-4.0.1/r-3.0.2/sc-2.4.3/sb-1.7.1/sp-2.3.1/sl-2.0.4/datatables.min.css" rel="stylesheet">
     <!--SELECT2-->
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <style>
         #map {
             height: 450px;
@@ -266,9 +484,30 @@
         .select2-container--default .select2-selection--single .select2-selection__arrow {
             height: 35px; /* Ajusta la altura del ícono de la flecha */
         }
+
+
+
+        /* Ajusta el z-index del modal si se superpone incorrectamente */
+        .modal-backdrop {
+            z-index: 1040 !important;
+        }
+
+        .modal {
+            z-index: 1050 !important;
+        }
+
+        /* Habilitar scroll en el fondo mientras el modal está abierto */
+        body.modal-open {
+            overflow: auto;
+            padding-right: 0 !important;
+        }
     </style>
 
     <style>
+.modal-content {
+    max-height: 80vh; /* Limita la altura del modal */
+    overflow-y: auto; /* Habilita el desplazamiento si el contenido es largo */
+}   
         /*fondo*/
 
         .fondo{
@@ -381,6 +620,9 @@
 @stop
 
 @section('js')
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <!--FADE-->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <!--LEAFLET-->
@@ -398,7 +640,19 @@
 
     <!--SWEET ALERT-->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            flatpickr("#periodo_trabajo", {
+                mode: "range",          // Permitir selección de rango
+                dateFormat: "Y-m-d",    // Formato de fecha
+                locale: "es",           // Idioma español
+                allowInput: true        // Permitir edición manual
+            });
+        });
+    </script>
 
     <script>
         // Seleccionar el input y la imagen de previsualización
@@ -426,6 +680,48 @@
 
     <script>
         $(document).ready(function() {
+            // Detectar el cambio en los radio buttons
+            $('input[name="sexo"]').on('change', function() {
+                let selectedSexo = $(this).val(); // Obtener el valor seleccionado
+
+                // Actualizar el tema y el contenido del callout según el sexo
+                let theme = selectedSexo === 'M' ? 'success' : 'danger';
+                let genderText = selectedSexo === 'M' ? 'Masculino' : 'Femenino';
+
+                // Modificar el HTML del callout
+                $('#sexo-callout').html(`
+                    <x-adminlte-callout 
+                        theme="${theme}" 
+                        title-class="text-bold text-dark"
+                        title="Sexo">
+                        ${genderText}
+                    </x-adminlte-callout>
+                `);
+            });
+        });
+    </script>
+    <script>
+        // Al abrir el modal
+        $('#modalPosgrados').on('shown.bs.modal', function () {
+            // Asegúrate de que no bloquee la interacción
+            $('body').css('overflow', 'auto');
+        });
+
+        // Función para guardar datos (ejemplo)
+        function guardarPosgrado() {
+            const posgrado = document.getElementById('posgrado').value;
+            if (posgrado) {
+                alert(`Posgrado "${posgrado}" guardado correctamente.`);
+                $('#modalPosgrados').modal('hide'); // Cierra el modal
+            } else {
+                alert('Por favor, llena el campo del nombre del posgrado.');
+            }
+        }
+    </script>
+
+
+    <script>        
+        $(document).ready(function() {
             AOS.init();
             $('#datospersonales').on('submit', function(e) {
                 e.preventDefault();
@@ -433,10 +729,13 @@
                 // Crea una nueva instancia de FormData
                 let formulario = new FormData(this);
 
+                // Agrega _method para actualización
+                formulario.append('_method', 'PUT');
+
                 // Llamada AJAX
                 $.ajax({
                     url: "{{ route('usuario.update', $datos_personales->id) }}",
-                    method: 'POST',
+                    method: 'POST', // Método debe ser POST para enviar _method
                     data: formulario,
                     contentType: false,
                     processData: false,
@@ -457,13 +756,147 @@
                         Swal.fire({
                             icon: 'error',
                             title: 'Error al guardar los datos personales',
-                            text: 'faltan campos'
+                            text: xhr.responseJSON ? xhr.responseJSON.message : 'faltan campos'
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script>        
+        $(document).ready(function() {
+            AOS.init();
+            $('#datosacademicos').on('submit', function(e) {
+                e.preventDefault();
+
+                // Crea una nueva instancia de FormData
+                let formulario = new FormData(this);
+
+                // Agrega _method para actualización
+                formulario.append('_method', 'PUT');
+
+                // Llamada AJAX
+                $.ajax({
+                    url: "{{ route('usuario.updateAcademic', $datos_personales->id) }}",
+                    method: 'POST', // Método debe ser POST para enviar _method
+                    data: formulario,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Datos personales actualizados correctamente',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: function(xhr) {
+                        // Si hay errores, mostrarlos
+                        console.log(xhr.responseJSON); // Para ver detalles de error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error al guardar los datos personales',
+                            text: xhr.responseJSON ? xhr.responseJSON.message : 'faltan campos'
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+    <script>        
+        $(document).ready(function() {
+            AOS.init();
+            $('#datoslaborales').on('submit', function(e) {
+                e.preventDefault();
+
+                // Crea una nueva instancia de FormData
+                let formulario = new FormData(this);
+
+                // Agrega _method para actualización
+                formulario.append('_method', 'PUT');
+
+                // Llamada AJAX
+                $.ajax({
+                    url: "{{ route('usuario.updateLab', $datos_personales->id) }}",
+                    method: 'POST', // Método debe ser POST para enviar _method
+                    data: formulario,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Datos personales actualizados correctamente',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: function(xhr) {
+                        // Si hay errores, mostrarlos
+                        console.log(xhr.responseJSON); // Para ver detalles de error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error al guardar los datos personales',
+                            text: xhr.responseJSON ? xhr.responseJSON.message : 'faltan campos'
+                        });
+                    }
+                });
+            });
+        });
+
+    </script>
+
+
+
+    <script>
+        $(document).ready(function() {
+            AOS.init();
+            $('#contrasena').on('submit', function(e) {
+                e.preventDefault();
+
+                // Crea una nueva instancia de FormData
+                let formulario = new FormData(this);
+
+                // Llamada AJAX
+                $.ajax({
+                    url: "{{ route('usuario.changePassword', $datos_personales->id) }}",
+                    method: 'PUT', // Método debe ser POST para enviar _method correctamente
+                    data: formulario,
+                    contentType: false,
+                    processData: false,
+                    headers: {
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                    },
+                    success: function(response) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Contraseña actualizada correctamente',
+                            showConfirmButton: false,
+                            timer: 1500
+                        });
+                    },
+                    error: function(xhr) {
+                        // Si hay errores, mostrarlos
+                        console.log(xhr.responseJSON); // Para ver detalles de error
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error al actualizar su contraseña',
+                            text: xhr.responseJSON ? xhr.responseJSON.message : 'faltan campos'
                         });
                     }
                 });
             });
         });
     </script>
+
+
 
     <script>
         // Inicializa el mapa y establece la vista inicial
@@ -506,8 +939,89 @@
                 })
                 .catch(error => {
                     console.error('Error al obtener la dirección:', error);
-                    $       ('#domicilio').val('');
+                    $('#domicilio').val('');
             });
         }
     </script>
+
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function() {
+        // Al cambiar la universidad, obtener facultades
+        $('#universidad').change(function() {
+            let universidadId = $(this).val();
+            $('#facultad').html('<option value="">Cargando facultades...</option>');
+            
+            // AJAX para obtener facultades
+            $.ajax({
+                url: '/facultades/' + universidadId,
+                type: 'GET',
+                success: function(data) {
+                    let facultadOptions = '<option value="">Seleccione una facultad</option>';
+                    $.each(data, function(index, facultad) {
+                        facultadOptions += `<option value="${facultad.id}">${facultad.facultad}</option>`;
+                    });
+                    $('#facultad').html(facultadOptions);
+                    $('#carrera').html('<option value="">Seleccione primero una facultad</option>'); // Reiniciar carreras
+                }
+            });
+        });
+
+        // Al cambiar la facultad, obtener carreras
+        $('#facultad').change(function() {
+            let facultadId = $(this).val();
+            $('#carrera').html('<option value="">Cargando carreras...</option>');
+            
+            // AJAX para obtener carreras
+            $.ajax({
+                url: '/carreras/' + facultadId,
+                type: 'GET',
+                success: function(data) {
+                    let carreraOptions = '<option value="">Seleccione una carrera</option>';
+                    $.each(data, function(index, carrera) {
+                        carreraOptions += `<option value="${carrera.id}">${carrera.nombreCarrera}</option>`;
+                    });
+                    $('#carrera').html(carreraOptions);
+                }
+            });
+        });
+    });
+    </script>
+
+
+    <script>
+        document.getElementById('universidad').addEventListener('change', function () {
+            const universidad_id = this.value;
+            fetch(`/facultades/${universidad_id}`)
+                .then(response => response.json())
+                .then(data => {
+                    let facultadesSelect = document.getElementById('facultad');
+                    facultadesSelect.innerHTML = '<option value="">Seleccione una facultad</option>';
+                    data.forEach(facultad => {
+                        facultadesSelect.innerHTML += `<option value="${facultad.id}">${facultad.facultad}</option>`;
+                    });
+                    // Limpia el select de carreras cuando se cambia la universidad
+                    document.getElementById('carrera').innerHTML = '<option value="">Seleccione una carrera</option>';
+                })
+                .catch(error => console.error('Error al cargar facultades:', error));
+        });
+
+        document.getElementById('facultad').addEventListener('change', function () {
+            const facultad_id = this.value;
+            fetch(`/carreras/${facultad_id}`)
+                .then(response => response.json())
+                .then(data => {
+                    let carrerasSelect = document.getElementById('carrera');
+                    carrerasSelect.innerHTML = '<option value="">Seleccione una carrera</option>';
+                    data.forEach(carrera => {
+                        carrerasSelect.innerHTML += `<option value="${carrera.id}">${carrera.nombreCarrera}</option>`;
+                    });
+                })
+                .catch(error => console.error('Error al cargar carreras:', error));
+        });
+
+    </script>
+
 @stop

@@ -30,6 +30,7 @@ class User extends Authenticatable
         'fecha_nacimiento',
         'lugar_nacimiento',
         'nacionalidad',
+        'universidad',
         'facultad',
         'carrera',
         'fecha_titulo',
